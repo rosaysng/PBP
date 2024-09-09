@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data Produk</title>
+    <style>
+        .form-container {
+            width: 320px; /* Reduced the width */
+            padding: 15px; /* Reduced padding for a more compact form */
+            border: 1px solid #2a689b;
+            margin: 20px auto;
+            text-align: left;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 10px; /* Reduced margin for compactness */
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .form-row label {
+            width: 120px; /* Adjusted the width for labels */
+            margin-right: 8px; /* Space between label and input */
+            font-weight: bold;
+            font-size: 13px; /* Slightly smaller font size */
+        }
+
+        .form-row input[type="text"],
+        .form-row select,
+        .form-row textarea {
+            flex: 1;
+            padding: 6px; /* Reduced padding for smaller input fields */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 13px; /* Smaller font size for compact appearance */
+        }
+
+        .form-row textarea {
+            resize: vertical;
+        }
+
+        .error {
+            color: red;
+            font-size: 11px; /* Smaller font size for error messages */
+            margin-top: 3px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column; /* Arrange vertically for checkboxes */
+            font-size: 13px; /* Smaller font size */
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            margin-bottom: 5px; /* Space between options */
+        }
+
+        .captcha-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .captcha-container span {
+            margin-right: 8px;
+            padding: 6px; /* Reduced padding */
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-width: 70px; /* Reduced min-width */
+            text-align: center;
+            font-size: 13px; /* Smaller font size */
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px; /* Reduced margin for compactness */
+        }
+
+        .form-buttons input {
+            padding: 8px 15px; /* Reduced padding */
+            background-color: #ccc;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px; /* Smaller font size */
+        }
+
+        .form-buttons input[type="reset"] {
+            background-color: #ccc;
+            color: black;
+        }
+
+        .form-buttons input:hover {
+            background-color: #1e5577;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2 style="font-size: 18px; text-align: center;">Form Tambah Data Produk</h2> <!-- Smaller font size for heading -->
+    <form id="productForm">
+        <div class="form-group">
+            <div class="form-row">
+                <label for="nama-produk">Nama Produk</label>
+                <input type="text" id="nama-produk" name="nama-produk">
+            </div>
+            <div class="error" id="nama-produk-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="deskripsi">Deskripsi Produk</label>
+                <textarea id="deskripsi" name="deskripsi" rows="3"></textarea>
+            </div>
+            <div class="error" id="deskripsi-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="kategori">Kategori</label>
+                <select id="kategori" name="kategori">
+                    <option value="">--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                </select>
+            </div>
+            <div class="error" id="kategori-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="sub-kategori">Sub Kategori</label>
+                <select id="sub-kategori" name="sub-kategori">
+                    <option value="">--Pilih Sub Kategori--</option>
+                </select>
+            </div>
+            <div class="error" id="sub-kategori-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="harga-satuan">Harga Satuan</label>
+                <input type="text" id="harga-satuan" name="harga-satuan">
+            </div>
+            <div class="error" id="harga-satuan-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label>Grosir</label>
+                <div class="radio-group">
+                    <label><input type="radio" id="grosir-ya" name="grosir" value="ya"> Ya</label>
+                    <label><input type="radio" id="grosir-tidak" name="grosir" value="tidak"> Tidak</label>
+                </div>
+            </div>
+            <div class="error" id="grosir-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="harga-grosir">Harga Grosir</label>
+                <input type="text" id="harga-grosir" name="harga-grosir" disabled>
+            </div>
+            <div class="error" id="harga-grosir-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="jasaPengiriman">Jasa Kirim</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="jasaPengiriman" value="JNE"> JNE</label>
+                    <label><input type="checkbox" name="jasaPengiriman" value="TIKI"> TIKI</label>
+                    <label><input type="checkbox" name="jasaPengiriman" value="SiCepat"> SiCepat</label>
+                    <label><input type="checkbox" name="jasaPengiriman" value="Ninja Express"> Ninja Express</label>
+                    <label><input type="checkbox" name="jasaPengiriman" value="Wahana"> Wahana</label>
+                </div>
+            </div>
+            <div class="error" id="jasa-kirim-error"></div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="captcha">Captcha</label>
+                <div class="captcha-container">
+                    <span id="captcha-text">AB123</span>
+                    <input type="text" id="captcha" name="captcha">
+                </div>
+            </div>
+            <div class="error" id="captcha-error"></div>
+        </div>
+        <div class="form-buttons">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+</div>
+
+<!-- Link the JavaScript file before the closing body tag -->
+<script src="validation.js"></script>
+</body>
+</html>
